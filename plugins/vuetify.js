@@ -4,10 +4,18 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import 'vuetify/styles'
 
+import { ar } from 'vuetify/locale'
+
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     components,
     directives,
+    rtl: true,
+    locale: {
+      locale: 'ar',
+      fallback: 'en',
+      messages: { ar }
+    }
   })
   nuxtApp.vueApp.use(vuetify)
 })
