@@ -1,7 +1,7 @@
 <template>
   <v-app >
     <v-app-bar color="primary" dark>
-      <v-row class="w-100" align="center" no-gutters>
+      <v-row class="w-100 px-4" align="center" no-gutters>
         <v-col cols="3" class="d-flex justify-start">
           <v-toolbar-title>متجر بسيط</v-toolbar-title>
         </v-col>

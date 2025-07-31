@@ -2,6 +2,9 @@ export default defineNuxtConfig({
     plugins: [
     '~/plugins/vuetify'
   ],
+    modules: [
+    'pinia/nuxt',
+  ],
     css: [
     '@mdi/font/css/materialdesignicons.min.css'
   ],
