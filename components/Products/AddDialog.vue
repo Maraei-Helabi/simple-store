@@ -28,6 +28,9 @@ const handleAdd = async () => {
 onMounted(async ()=>{
     await productsStore.GetProductsCategory();
 })
+function closeDialog() {
+  dialog.value = false;
+}
 </script>
 
 <template>
@@ -41,7 +44,7 @@ onMounted(async ()=>{
           icon="mdi-close"
           size="small"
           variant="flat"
-          @click="dialog.value = false"
+          @click="closeDialog()"
         />
       </v-row>
       <v-form ref="form" @submit.prevent="handleAdd">
@@ -92,7 +95,7 @@ onMounted(async ()=>{
           ></v-text-field>
         </v-card-text>
         <v-card-actions class="justify-end">
-          <v-btn @click="dialog.value = false" class="ml-3">إغلاق</v-btn>
+          <v-btn @click="closeDialog()" class="ml-3">إغلاق</v-btn>
           <v-btn
             type="submit"
             color="primary"
