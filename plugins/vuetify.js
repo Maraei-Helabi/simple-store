@@ -15,7 +15,19 @@ export default defineNuxtPlugin((nuxtApp) => {
       locale: 'ar',
       fallback: 'en',
       messages: { ar }
-    }
+    },
+        theme: {
+      themes: {
+        light: {
+          dark: false,
+          colors: {
+            primary: "#000000FF", 
+            secondary: "#dedede" 
+            
+          }
+        },
+      }
+    },
   })
   nuxtApp.vueApp.use(vuetify)
 })

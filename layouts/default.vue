@@ -1,21 +1,12 @@
 <template>
   <v-app >
     <v-app-bar color="primary" dark>
-      <v-row class="w-100 px-4" align="center" no-gutters>
-        <v-col cols="3" class="d-flex justify-start">
-          <v-toolbar-title>متجر بسيط</v-toolbar-title>
-        </v-col>
-        <v-col cols="6" class="d-flex justify-center">
-          <v-text-field
-            density="compact"
-            hide-details
-            variant="outlined"
-            placeholder="ابحث عن منتج..."
-            prepend-inner-icon="mdi-magnify"
-            class="search-box"
-          />
-        </v-col>
-        <v-col cols="3" class="d-flex justify-end">
+      <v-row class="w-100 px-4 justify-space-between" align="center" no-gutters>
+        <div  class="d-flex justify-start">
+          <v-toolbar-title>متجر</v-toolbar-title>
+        </div>
+
+        <div  class="d-flex justify-end">
           <NuxtLink to="/cart">
             <v-btn icon class="mx-1" color="white">
               <v-icon color="white">mdi-cart</v-icon>
@@ -26,7 +17,7 @@
               <v-icon color="white">mdi-package-variant</v-icon>
             </v-btn>
           </NuxtLink>
-        </v-col>
+        </div>
       </v-row>
     </v-app-bar>
     <v-main>
@@ -43,5 +34,9 @@
 .search-box {
   min-width: 200px;
   max-width: 400px;
+}
+
+* {
+    font-family: 'system-ui', sans-serif !important;
 }
 </style>

@@ -1,25 +1,29 @@
 <template>
     <!-- الادوات -->
+     <v-container fluid class="pa-4 pb-0">
+
+     
     <v-row class="mb-4 align-center" justify="space-between">
 
-        <v-col cols="12" md="4" class="text-right">
+        <div class="text-right">
             <v-btn color="primary" @click="openAddDialog()" prepend-icon="mdi-plus" elevation="2">
                 إضافة منتج
             </v-btn>
-        </v-col>
+        </div>
 
-        <v-col cols="12" md="4" class="text-center">
-            <v-text-field v-model="search" prepend-inner-icon="mdi-magnify" label="بحث" hide-details dense outlined
+        <div  class="text-center">
+            <v-text-field style="min-width: 250px;" v-model="search" prepend-inner-icon="mdi-magnify" label="بحث" hide-details dense outlined
                 rounded :clearable="true" @click:clear="clearFiltering()" color="primary"></v-text-field>
-        </v-col>
+        </div>
 
 
-        <v-col cols="12" md="4" class="text-left">
+        <div  class="text-left">
             <v-btn color="secondary" @click="openFilterDialog()" prepend-icon="mdi-filter-variant" elevation="2">
                 فلترة
             </v-btn>
-        </v-col>
+        </div>
     </v-row>
+    </v-container>
         <AddDialog v-model:dialog="addDialog"/>
         <FilterDialog v-model:dialog="filterDialog" @filter="setFilter"/>
 
@@ -71,4 +75,11 @@ watch(search, (val) => {
 });
 </script>
 
-<style></style>
+<style scoped>
+    .v-input__control .v-field.v-field--appended.v-field--center-affix.v-field--prepended.v-field--variant-filled.v-theme--light.v-field--rounded.v-locale--is-rtl{
+        height: 50px;
+    }
+    .v-input__control .v-field__overlay{
+        background-color: transparent !important;
+    }
+</style>

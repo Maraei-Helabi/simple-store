@@ -4,7 +4,7 @@
 
         <!-- جدول المنتجات -->
         <v-data-table-virtual v-if="getProducts" hover :headers="headers" :items="filteredProducts" :loading="loading"
-            item-value="id" fixed-header height="400" class="elevation-2 rounded-lg"
+            item-value="id" fixed-header  class="elevation-2 rounded-lg"
             no-data-text="لا توجد بيانات متاحة." loading-text="يتم جلب المنتجات...">
             <template #item="{ item, index }">
                 <tr>
@@ -26,15 +26,15 @@
                     <td>{{ item.rating?.rate ?? '-' }}</td>
                     <td>{{ item.rating?.count ?? '-' }}</td>
                     <td>
-                        <v-btn @click="addToCart(item)" icon color="green">
-                            <v-icon>mdi-cart-plus</v-icon>
-                        </v-btn>
-                        <v-btn @click="openEditDialog(item)" icon color="blue">
-                            <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
-                        <v-btn @click="openDeleteDialog(item)" icon color="red">
-                            <v-icon>mdi-delete</v-icon>
-                        </v-btn>
+                        <button @click="addToCart(item)" class="px-2" >
+                            <v-icon color="primary">mdi-cart-plus</v-icon>
+                        </button>
+                        <button @click="openEditDialog(item)" class="px-2" >
+                            <v-icon color="orange">mdi-pencil</v-icon>
+                        </button>
+                        <button @click="openDeleteDialog(item)" class="px-2">
+                            <v-icon color="red">mdi-delete</v-icon>
+                        </button>
                     </td>
                 </tr>
             </template>
