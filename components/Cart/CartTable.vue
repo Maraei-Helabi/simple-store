@@ -16,6 +16,7 @@
                                 منتجات)</span></h3>
                     </div>
 
+                    <div v-if="!cartStore.loading">
                     <!-- المنتجات -->
                     <v-row class="align-center">
 
@@ -57,6 +58,16 @@
                                 </v-col>
                             </v-row>
                         </div>
+                    </div>
+                    <div v-else class="text-center pa-4">
+                        <p>لا يوجد منتجات في السلة</p>
+                    </div>
+                    </div>
+                    <div v-else class="text-center pa-4">
+                        <v-progress-circular
+                            indeterminate
+                            color="primary"
+                        ></v-progress-circular>
                     </div>
                 </v-card>
             </v-col>
