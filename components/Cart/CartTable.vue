@@ -97,14 +97,14 @@
             <v-card class="mt-6 pa-6 rounded-lg w-100" color="black" dark>
                 <v-row>
                     <v-col  cols="12" sm="7">
-                        <div class="text-h6 font-weight-bold mb-1">تصفح هواتف ابل</div>
+                        <div class="text-h5 font-weight-bold mb-1 mt-8">تصفح هواتف ابل</div>
                         <div class="text-caption mb-4">منتجات ابل متوفره الان</div>
                         <v-btn href="/products" color="white" text class="black--text font-weight-bold rounded-lg">تسوق الان</v-btn>
                     </v-col>
-                    <v-col cols="12" sm="5">
+                    <v-col cols="12" sm="5" >
                         <!-- <v-img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" height="100"
                             contain></v-img> -->
-                        <img src="~/public/Apple iphone 15.png" style="    height: 200px;"
+                        <img src="~/public/Apple iphone 15.png" alt="iphone" style="    height: 200px;"
                             />
                     </v-col>
                 </v-row>

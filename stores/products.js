@@ -91,7 +91,7 @@ export const useProductsStore = defineStore('products', () => {
 
     async function AddProduct(newProduct) {
         try {
-            const data = await $fetch('products', {
+            const data = await useFetchApi('products', {
                 method: 'POST',
                 body: newProduct
             });
@@ -104,7 +104,7 @@ export const useProductsStore = defineStore('products', () => {
 
     async function UpdateProduct(id, updatedProduct) {
         try {
-            const data = await $fetch(`products/${id}`, {
+            const data = await useFetchApi(`products/${id}`, {
                 method: 'PUT',
                 body: updatedProduct
             });
@@ -118,7 +118,6 @@ export const useProductsStore = defineStore('products', () => {
     async function DeleteProduct(id) {
         loading.value = true;
         try {
-            console.log('id--', id);
             const { data, error } = await useFetchApi(`products/${id}`, {
                 method: 'DELETE'
             });
