@@ -9,20 +9,21 @@
             <template #item="{ item, index }">
                 <tr>
                     <td>{{ index + 1 }}</td>
+                                        <td>
+                        <v-img :src="item.image" alt="صورة المنتج" max-width="50" max-height="50" class="rounded"
+                            contain></v-img>
+                    </td>
                     <td class="ellipsis-text mxw-100">
                         <v-tooltip activator="parent" :text="item.title" location="top"></v-tooltip>
                         {{ item.title }}
                     </td>
-                    <td>{{ item.price }}</td>
+                    
                     <td class="ellipsis-text mxw-200">
                         <v-tooltip activator="parent" :text="item.description" location="top"></v-tooltip>
                         {{ item.description }}
                     </td>
                     <td>{{ item.category }}</td>
-                    <td>
-                        <v-img :src="item.image" alt="صورة المنتج" max-width="50" max-height="50" class="rounded"
-                            contain></v-img>
-                    </td>
+                    <td>{{ item.price }}</td>
                     <td>{{ item.rating?.rate ?? '-' }}</td>
                     <td>{{ item.rating?.count ?? '-' }}</td>
                     <td>
@@ -56,11 +57,11 @@ import EditDialog from '~/components/Products/EditDialog.vue';
 
 const headers = [
     { title: "ID", key: "id" },
+    { title: "الصورة", key: "image" },
     { title: "العنوان", key: "title" },
-    { title: "السعر", key: "price" },
     { title: "الوصف", key: "description" },
     { title: "التصنيف", key: "category" },
-    { title: "الصورة", key: "image" },
+    { title: "السعر", key: "price" },
     { title: "التقييم", key: "rating.rate" },
     { title: "عدد التقييمات", key: "rating.count" },
     { title: "خيارات", key: "options", sortable: false },

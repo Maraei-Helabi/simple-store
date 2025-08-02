@@ -75,7 +75,7 @@ watch(search, (val) => {
 });
 </script>
 
-<style scoped>
+<style>
     .v-input__control .v-field.v-field--appended.v-field--center-affix.v-field--prepended.v-field--variant-filled.v-theme--light.v-field--rounded.v-locale--is-rtl{
         height: 50px;
     }
