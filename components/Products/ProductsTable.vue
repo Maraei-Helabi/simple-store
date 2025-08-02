@@ -27,7 +27,7 @@
                     <td>{{ item.rating?.rate ?? '-' }}</td>
                     <td>{{ item.rating?.count ?? '-' }}</td>
                     <td>
-                        <button @click="addToCart(item)" class="px-2" >
+                        <button @click="addToCart(item.id)" class="px-2" >
                             <v-icon color="primary">mdi-cart-plus</v-icon>
                         </button>
                         <button @click="openEditDialog(item)" class="px-2" >
@@ -51,6 +51,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useProductsStore } from '~/stores/products';
+import { useCartStore } from '~/stores/cart';
 import DeleteDialog from '~/components/Products/DeleteDialog.vue';
 import TableHeader from '~/components/Products/TableHeader.vue';
 import EditDialog from '~/components/Products/EditDialog.vue';
@@ -68,6 +69,7 @@ const headers = [
 ];
 
 const productsStore = useProductsStore();
+const cartStore = useCartStore();
 const { products, loading, getProducts } = storeToRefs(productsStore);
 
 
@@ -77,8 +79,8 @@ const deleteDialog = ref(false);
 const itemSelected = ref(null);
 const search = ref('');
 
-function addToCart(item) {
-    alert(`تمت إضافة المنتج (${item.title}) للسلة!`);
+function addToCart(itemId) {
+    cartStore.AddToCart(itemId)
 }
 
 function openEditDialog(item) {
