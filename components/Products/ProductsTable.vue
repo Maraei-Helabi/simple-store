@@ -1,45 +1,58 @@
 <template>
-    <v-btn @click="openAddDialog(item)" icon>
-        +
-    </v-btn>
-    <v-data-table-virtual v-if="getProducts" hover class="mt-md-2" no-data-text="لا توجد بيانات متاحة."
-        loading-text="يتم جلب المنتجات..." :headers="headers" :items="getProducts" :loading="loading" height="400"
-        item-value="id" fixed-header>
-        <template #item="{ item, index }">
-            <tr>
-                <td>{{ index + 1 }}</td>
-                <td>{{ item.title }}</td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.description }}</td>
-                <td>{{ item.category }}</td>
-                <td>
-                    <img :src="item.image" alt="صورة المنتج" style="width: 50px; height: 50px; object-fit: contain;" />
-                </td>
-                <td>{{ item.rating?.rate ?? '-' }}</td>
-                <td>{{ item.rating?.count ?? '-' }}</td>
-                <td>
-                    <v-btn @click="addToCart(item)" icon>
-                        <v-icon>mdi-cart-plus</v-icon>
-                    </v-btn>
-                    <v-btn @click="openEditDialog(item)" icon>
-                        <v-icon>mdi-pencil</v-icon>
-                    </v-btn>
-                    <v-btn @click="openDeleteDialog(item)" icon>
-                        <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-                </td>
-            </tr>
-        </template>
-    </v-data-table-virtual>
-    <DeleteDialog v-model:dialog="deleteDialog" :item="itemSelected" />
-    <EditDialog v-model:dialog="editDialog" :item="itemSelected"/>
-    <AddDialog v-model:dialog="addDialog" :item="itemSelected" />
+    <v-container fluid class="pa-4">
+        <TableHeader/>
+
+        <!-- جدول المنتجات -->
+        <v-data-table-virtual v-if="getProducts" hover :headers="headers" :items="filteredProducts" :loading="loading"
+            item-value="id" fixed-header height="400" class="elevation-2 rounded-lg"
+            no-data-text="لا توجد بيانات متاحة." loading-text="يتم جلب المنتجات...">
+            <template #item="{ item, index }">
+                <tr>
+                    <td>{{ index + 1 }}</td>
+                    <td class="ellipsis-text mxw-100">
+                        <v-tooltip activator="parent" :text="item.title" location="top"></v-tooltip>
+                        {{ item.title }}
+                    </td>
+                    <td>{{ item.price }}</td>
+                    <td class="ellipsis-text mxw-200">
+                        <v-tooltip activator="parent" :text="item.description" location="top"></v-tooltip>
+                        {{ item.description }}
+                    </td>
+                    <td>{{ item.category }}</td>
+                    <td>
+                        <v-img :src="item.image" alt="صورة المنتج" max-width="50" max-height="50" class="rounded"
+                            contain></v-img>
+                    </td>
+                    <td>{{ item.rating?.rate ?? '-' }}</td>
+                    <td>{{ item.rating?.count ?? '-' }}</td>
+                    <td>
+                        <v-btn @click="addToCart(item)" icon color="green">
+                            <v-icon>mdi-cart-plus</v-icon>
+                        </v-btn>
+                        <v-btn @click="openEditDialog(item)" icon color="blue">
+                            <v-icon>mdi-pencil</v-icon>
+                        </v-btn>
+                        <v-btn @click="openDeleteDialog(item)" icon color="red">
+                            <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                    </td>
+                </tr>
+            </template>
+        </v-data-table-virtual>
+
+        <!--  -->
+        <DeleteDialog v-model:dialog="deleteDialog" :item="itemSelected" />
+        <EditDialog v-model:dialog="editDialog" :item="itemSelected" />
+    </v-container>
 </template>
+
 <script setup>
-import { useProductsStore } from "~/stores/products";
-import DeleteDialog from "~/components/Products/DeleteDialog.vue";
-import AddDialog from "~/components/Products/AddDialog.vue";
-import EditDialog from "~/components/Products/EditDialog.vue";
+import { ref, computed, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useProductsStore } from '~/stores/products';
+import DeleteDialog from '~/components/Products/DeleteDialog.vue';
+import TableHeader from '~/components/Products/TableHeader.vue';
+import EditDialog from '~/components/Products/EditDialog.vue';
 
 const headers = [
     { title: "ID", key: "id" },
@@ -56,33 +69,54 @@ const headers = [
 const productsStore = useProductsStore();
 const { products, loading, getProducts } = storeToRefs(productsStore);
 
-import { ref } from 'vue';
-const addDialog = ref(false);
+
 const editDialog = ref(false);
 const deleteDialog = ref(false);
+
 const itemSelected = ref(null);
+const search = ref('');
 
 function addToCart(item) {
-    // هنا تضع منطق إضافة المنتج للسلة
     alert(`تمت إضافة المنتج (${item.title}) للسلة!`);
 }
+
 function openEditDialog(item) {
     editDialog.value = true;
     itemSelected.value = item;
 }
-function openAddDialog(item) {
-    addDialog.value = true;
-    itemSelected.value = item;
-}
+
 function openDeleteDialog(item) {
     deleteDialog.value = true;
     itemSelected.value = item;
-    console.log(itemSelected.value);
 }
 
+// تصفية النتائج حسب البحث
+const filteredProducts = computed(() => {
+    if (!search.value) return getProducts.value;
+    return getProducts.value.filter(p =>
+        p.title.toLowerCase().includes(search.value.toLowerCase())
+    );
+});
 
 onMounted(async () => {
     await productsStore.GetAllProducts();
 });
-
 </script>
+<style scoped>
+.mxw-200 {
+    max-width: 200px;
+}
+
+.mxw-100 {
+    max-width: 100px;
+}
+
+.ellipsis-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+th, td {
+    padding: 4px 6px !important;
+}
+</style>
