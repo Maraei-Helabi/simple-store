@@ -16,12 +16,16 @@
           />
         </v-col>
         <v-col cols="3" class="d-flex justify-end">
-          <v-btn icon class="mx-1" color="white">
-            <v-icon color="white">mdi-cart</v-icon>
-          </v-btn>
-          <v-btn icon class="mx-1" color="white">
-            <v-icon color="white">mdi-package-variant</v-icon>
-          </v-btn>
+          <NuxtLink to="/cart">
+            <v-btn icon class="mx-1" color="white">
+              <v-icon color="white">mdi-cart</v-icon>
+            </v-btn>
+          </NuxtLink>
+          <NuxtLink to="/products">
+            <v-btn icon class="mx-1" color="white">
+              <v-icon color="white">mdi-package-variant</v-icon>
+            </v-btn>
+          </NuxtLink>
         </v-col>
       </v-row>
     </v-app-bar>
